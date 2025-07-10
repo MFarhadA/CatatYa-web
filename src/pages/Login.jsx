@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from './../supabaseClient';
+
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -7,18 +9,29 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault(); // cegah reload halaman
-    // validasi sama seperti sebelumnya
-    const validUsername = 'admin';
-    const validPassword = '12345';
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    if (username === validUsername && password === validPassword) {
-      localStorage.setItem('token', 'mock_token');
-      navigate('/');
-    } else {
-      setError('Username atau password salah');
+    // ambil user dari tabel users
+    const { data, error: fetchError } = await supabase
+      .from('users')
+      .select('*')
+      .eq('username', username)
+      .single(); // hanya ambil satu user
+
+    if (fetchError || !data) {
+      setError('Username tidak ditemukan');
+      return;
     }
+
+    if (data.password_hash !== password) {
+      setError('Password salah');
+      return;
+    }
+
+    // simpan user ke localStorage
+    localStorage.setItem('user', JSON.stringify({ id: data.id, username: data.username }));
+    navigate('/');
   };
 
   return (
@@ -45,16 +58,15 @@ export default function Login() {
         <button type="submit" className="btn btn-primary w-full">
           Login
         </button>
+        {error && (
+          <div role="alert" className="alert alert-error mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{error}</span>
+          </div>
+        )}
       </form>
-
-      {error && (
-        <div role="alert" className="alert alert-error mt-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span>{error}</span>
-        </div>
-      )}
     </div>
   );
 }

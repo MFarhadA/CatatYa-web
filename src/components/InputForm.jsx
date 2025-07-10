@@ -40,7 +40,7 @@ function InputForm({ onAddTransaction }) {
       type: selectedType,
       description: description,
       amount: parseFloat(amount),
-      photo: photoPreview
+      photo: photo
     };
 
     onAddTransaction(newTransaction);
@@ -57,21 +57,21 @@ function InputForm({ onAddTransaction }) {
 
   return (
     <div className="card flex-1/3 rounded-box border-base-300 border overflow-x-auto gap-2 p-5">
-      <label className="label mb-2">Input Data Pemasukan / Pengeluaran</label>
+      <label className="label font-semibold justify-center mb-2">Input Data Pemasukan / Pengeluaran</label>
       <div className="join">
         <input 
-          className={`join-item btn flex-1 ${selectedType === 'Pemasukan' ? 'btn-active' : ''}`}
+          className={`join-item btn flex-1 ${selectedType === 'Pemasukan' ? 'btn-success btn-active' : ''}`}
           type="radio" 
           name="type" 
-          aria-label="Pemasukan" 
+          aria-label="Pemasukan"
           checked={selectedType === 'Pemasukan'}
           onChange={() => setSelectedType('Pemasukan')}
         />
         <input 
-          className={`join-item btn flex-1 ${selectedType === 'Pengeluaran' ? 'btn-active' : ''}`}
+          className={`join-item btn flex-1 ${selectedType === 'Pengeluaran' ? 'btn-error btn-active' : ''}`}
           type="radio" 
           name="type" 
-          aria-label="Pengeluaran" 
+          aria-label="Pengeluaran"
           checked={selectedType === 'Pengeluaran'}
           onChange={() => setSelectedType('Pengeluaran')}
         />

@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/login';
+import Login from './pages/Login';
 import Homepage from './pages/homepage';
 
 function PrivateRoute({ children }) {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" replace />;
+  const user = localStorage.getItem('user');
+  return user ? children : <Navigate to="/login" replace />;
 }
 
 export default function App() {
