@@ -151,7 +151,7 @@ function Home() {
     <>
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
-          <a className="btn btn-ghost text-xl">CatatYa</a>
+          <a className="btn btn-ghost text-xl font-black">CatatYa</a>
         </div>
         <div className="navbar-end gap-4">
             <label className="swap swap-rotate">

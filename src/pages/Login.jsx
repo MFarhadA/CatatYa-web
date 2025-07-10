@@ -37,7 +37,7 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen px-4">
-      <h1 className="text-4xl font-bold mb-10">CatatYa</h1>
+      <h1 className="text-4xl font-black mb-10">CatatYa</h1>
 
       <form onSubmit={handleLogin} className="card max-w-md rounded-box border-base-300 border overflow-x-auto gap-2 p-5 w-full">
         <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
