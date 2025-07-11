@@ -156,7 +156,7 @@ function Home() {
         </div>
         <div className="navbar-end gap-4">
             <label className="swap swap-rotate">
-            <input type="checkbox" className="theme-controller" value="sunset" />
+            <input type="checkbox" className="theme-controller" value="forest" />
             <svg
               className="swap-off h-8 w-8 fill-current"
               xmlns="http://www.w3.org/2000/svg"
