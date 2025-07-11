@@ -5,12 +5,24 @@ function InputForm({ onAddTransaction }) {
   const [selectedType, setSelectedType] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [amountFormatted, setAmountFormatted] = useState('');
   const [createdAt, setCreatedAt] = useState('');
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
   
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
+
+  const formatNumberWithDots = (value) => {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  };
+
+  const handleAmountChange = (e) => {
+    const rawValue = e.target.value.replace(/\./g, '').replace(/\D/g, '');
+    setAmount(rawValue);
+    setAmountFormatted(formatNumberWithDots(rawValue));
+  };
+
 
   const handlePhotoUpload = (event) => {
     const file = event.target.files[0];
@@ -90,14 +102,16 @@ function InputForm({ onAddTransaction }) {
 
       {/* Input nominal */}
       <label className="label">Nominal</label>
-      <label className="input w-full">
-        <span className="label">Rp. </span>
+      <label className="input w-full items-center gap-2">
+        <span className="text-sm">Rp.</span>
         <input 
-          type="number" 
-          required 
+          type="text"
+          inputMode="numeric"
           placeholder="Masukkan nominal"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          value={amountFormatted}
+          onChange={handleAmountChange}
+          className="w-full bg-transparent outline-none"
+          required
         />
       </label>
 
