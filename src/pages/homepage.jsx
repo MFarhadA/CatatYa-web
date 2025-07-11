@@ -82,6 +82,7 @@ function Home() {
         type: newTransaction.type,
         description: newTransaction.description,
         amount: newTransaction.amount,
+        created_at: newTransaction.created_at,
         photo_url: photoUrl,
       }]);
 

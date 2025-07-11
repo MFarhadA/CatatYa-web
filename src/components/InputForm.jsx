@@ -5,6 +5,7 @@ function InputForm({ onAddTransaction }) {
   const [selectedType, setSelectedType] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
   
@@ -31,7 +32,7 @@ function InputForm({ onAddTransaction }) {
   };
 
   const handleSubmit = () => {
-    if (!selectedType || !description || !amount) {
+    if (!selectedType || !description || !amount || !createdAt) {
       alert('Mohon lengkapi semua field yang diperlukan!');
       return;
     }
@@ -40,6 +41,7 @@ function InputForm({ onAddTransaction }) {
       type: selectedType,
       description: description,
       amount: parseFloat(amount),
+      created_at: createdAt,
       photo: photo
     };
 
@@ -98,6 +100,16 @@ function InputForm({ onAddTransaction }) {
           onChange={(e) => setAmount(e.target.value)}
         />
       </label>
+
+      {/* Date Input Section */}
+      <label className="label">Tanggal</label>
+      <input
+        type="date"
+        required 
+        className="input"
+        value={createdAt}
+        onChange={(e) => setCreatedAt(e.target.value)}
+      />
 
       {/* Photo Upload Section */}
       <label className="label">Foto Bukti (Opsional)</label>
