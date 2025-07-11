@@ -102,7 +102,7 @@ function TransactionTable({ transactions, onEditTransaction, onDeleteTransaction
                 </td>
                 <td>{transaction.description}</td>
                 <td>
-                  <span className={`text-sm badge ${transaction.type === 'Pemasukan' ? 'badge-success' : 'badge-error'}`}>
+                  <span className={`text-sm font-semibold ${transaction.type === 'Pemasukan' ? 'text-success' : 'text-error'}`}>
                     {transaction.type === 'Pemasukan' ? '+' : '-'}{formatCurrency(transaction.amount)}
                   </span>
                 </td>
