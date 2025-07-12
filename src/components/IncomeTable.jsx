@@ -79,7 +79,7 @@ function TransactionTable({ transactions, onEditTransaction, onDeleteTransaction
           <thead>
             <tr>
               <th></th>
-              <th>Tipe</th>
+              <th>Tanggal</th>
               <th>Deskripsi</th>
               <th>Nominal</th>
               <th>Bukti</th>
